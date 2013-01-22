@@ -22,6 +22,11 @@ namespace ToDerp
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/lib/modernizr-*"));
 
+            bundles.Add(new StyleBundle("~/bundles/style").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/app.css"
+                ));
+
         }
     }
 }
