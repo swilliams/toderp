@@ -1,5 +1,45 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "To Derp";
 }
 
-<h2>Index</h2>
+
+<div class="container">
+    <h1>ToDos</h1>
+
+    <div class="row">
+        <form id="create">
+            <div class="span12">
+            <input type="text" name="new" placeholder="Walk the dog" class="span8" />
+            <input type="submit" class="btn btn-inverse btn-hug" id="" value="Add" />
+                </div>
+        </form>
+    </div>
+
+    <h3>In Progress</h3>
+    <ul id="inprogress">
+        <li class="row">
+            <span class="span0">&nbsp;</span>
+            <span class="span6 head">Task</span>
+            <span class="span4 head">Created</span>
+        </li>
+        <li class="row">
+            <span class="span0"><input type="checkbox" id="todo1" /></span>
+            <span class="span6 task"><label for="todo1">Go to the store and get milk</label></span>
+            <span class="span4 date">9:38 AM January 22, 2013</span>
+        </li>
+    </ul>
+
+    <h3>Completed</h3>
+    <ul id="completed">
+        <li class="row">
+            <span class="span0">&nbsp;</span>
+            <span class="span6 head">Task</span>
+            <span class="span4 head">Completed</span>
+        </li>
+        <li class="row">
+            <span class="span0"><input type="checkbox" id="todo2" checked="checked" /></span>
+            <span class="span6 task"><label for="todo2">Eat Pizza</label></span>
+            <span class="span4 date">9:38 AM January 22, 2013</span>
+        </li>
+    </ul>
+</div>
