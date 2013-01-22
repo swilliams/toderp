@@ -45,5 +45,10 @@ namespace ToDerp.Data.Services
                 _context.Dispose();
             }
         }
+
+        public TodoItem Single(int itemId)
+        {
+            return AllItems().FirstOrDefault(i => i.TodoItemId == itemId);
+        }
     }
 }
