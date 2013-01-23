@@ -73,6 +73,8 @@ class Controller
 
 		newItem = new TodoItem
 		formView = new FormView model: newItem
+
+		# TODO, use the global dispatcher
 		newItem.once 'sync', @_renderItem, @
 
 		coll.fetch()

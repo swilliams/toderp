@@ -6,7 +6,11 @@ Handlebars.registerHelper('prettydate', (text) ->
 	return '' if text is undefined
 	return '' unless text?
 	d = parseSerializedDate(text)
-	hours = d.getHours()
-	if hours > 12 then hours -= 12
-	"#{hours}:#{d.getMinutes()}  #{d.getMonth() + 1}/#{d.getDate()}/#{d.getFullYear()}"
+	hours = d.getHours() + 1
+	ampm = "AM"
+	if hours > 12  
+		hours -= 12
+		ampm = "PM"
+	months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+	"#{hours}:#{d.getMinutes()} #{ampm}  #{months[d.getMonth()]} #{d.getDate()}, #{d.getFullYear()}"
 	)
