@@ -27,18 +27,18 @@ namespace ToDerp.Areas.Api.Controllers
         }
 
         [HttpPost]
-        public JsonResult Index(TodoItem item)
+        public JsonResult Item(TodoItem item)
         {
             _repo.Add(item);
-            int id = item.TodoItemId;
-            return Json(id);
+            return Json(item);
         }
 
         [HttpPut]
-        public EmptyResult Index(int id, TodoItem item)
+        public EmptyResult Item(int id, TodoItem item)
         {
             var dbItem = _repo.Single(id);
             dbItem.Completed = item.Completed;
+            dbItem.TaskName = item.TaskName;
             if (dbItem.Completed)
                 dbItem.CompletedAt = DateTime.Now;
             else 
