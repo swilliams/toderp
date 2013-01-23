@@ -6,12 +6,6 @@ class TodoItems extends Backbone.Collection
 	model: TodoItem
 	url: '/api/Todo'
 
-	inProgress: ->
-		@where Completed: false
-
-	completed: ->
-		@where Completed: true
-
 class BaseView extends Backbone.View
 	parseForm: ->
 		inputs = @$('input')
@@ -91,8 +85,6 @@ jQuery ->
 	c = new Controller
 	c.index()
 	
-
 @derp = window.derp ? {}
 @derp.TodoItem = TodoItem
 @derp.TodoItems = TodoItems
-@derp.TodoView = TodoView

@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
   var BaseView, Controller, FormView, TodoItem, TodoItems, TodoView, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -30,18 +30,6 @@
     TodoItems.prototype.model = TodoItem;
 
     TodoItems.prototype.url = '/api/Todo';
-
-    TodoItems.prototype.inProgress = function() {
-      return this.where({
-        Completed: false
-      });
-    };
-
-    TodoItems.prototype.completed = function() {
-      return this.where({
-        Completed: true
-      });
-    };
 
     return TodoItems;
 
@@ -205,7 +193,5 @@
   this.derp.TodoItem = TodoItem;
 
   this.derp.TodoItems = TodoItems;
-
-  this.derp.TodoView = TodoView;
 
 }).call(this);

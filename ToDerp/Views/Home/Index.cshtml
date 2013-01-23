@@ -2,7 +2,6 @@
     ViewBag.Title = "To Derp";
 }
 
-
 <script type="text/html" id="row-template">
     <span class="span0"><input type="checkbox" name="Completed" id="todo-{{TodoItemId}}" {{#if Completed}}checked="checked"{{/if}} /></span>
     <span class="span6 task"><label for="todo-{{TodoItemId}}">{{TaskName}}</label></span>
@@ -10,8 +9,6 @@
 </script>
 
 <div class="container">
-    
-
     <div class="row" id="create-container">
         <h1>ToDos</h1>
         <form id="create">
@@ -29,13 +26,12 @@
             <span class="span6 head">Task</span>
             <span class="span4 head">Created</span>
         </li>
-
     </ul>
 
     <h3>Completed</h3>
     <ul id="completed" class="stripe">
         <li class="row">
-            <span class="span0 check-padding">&nbsp;</span>
+            <span class="span0 check-padding"></span>
             <span class="span6 head">Task</span>
             <span class="span4 head">Completed</span>
         </li>
