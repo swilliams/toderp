@@ -17,6 +17,12 @@ class TodoView extends Backbone.View
 	className: 'row'
 	templateId: '#row-template'
 
+	initialize: ->
+		@model.on 'change:Completed', @remove, @
+
+	events:
+		'change input[type=checkbox]' : 'checkChanged'
+
 	createTemplate: ->
 		@template = @template ? Handlebars.compile($(@templateId).html())
 		@template
@@ -25,6 +31,44 @@ class TodoView extends Backbone.View
 		tmpl = @createTemplate()
 		@$el.html tmpl(@model.toJSON())
 		@
+
+	parseForm: ->
+		inputs = @$('input')
+		parseFn = (obj, input) =>
+			input = $(input)
+			inputName = input.attr('name')
+			obj[inputName] = if input.is('[type=checkbox]') then input.is(':checked') else input.val()
+			obj
+		_.reduce inputs, parseFn, {}
+
+	checkChanged: ->
+		formValues = @parseForm()
+		@model.save formValues
+
+
+class Controller
+	inProgressId: '#inprogress'
+	completeId: '#completed'
+
+	index: ->
+		coll = new TodoItems
+		coll.on 'reset', @_renderItems, @
+
+		coll.fetch()
+
+	_renderItem: (item) ->
+		view = new TodoView model: item
+		inList = if item.get('Completed') then @completeId else @inProgressId
+		$(inList).append view.render().el
+		item.once 'change:Completed', @_renderItem, @
+
+	_renderItems: (coll) ->
+		@_renderItem item for item in coll.models
+
+jQuery ->
+	c = new Controller
+	c.index()
+	
 
 @derp = window.derp ? {}
 @derp.TodoItem = TodoItem
