@@ -1,5 +1,9 @@
 $text-color: #777;
 $light-text-color: #999;
+$stripe: #dff2df;
+$light-back: #f7fcf7;
+$border-dark: #c7e8c8;
+$border-light: #ebf7eb;
 
 .btn-hug {
 	border-top-left-radius: 0;
@@ -10,9 +14,30 @@ $light-text-color: #999;
 	padding: 6px 20px;
 }
 
+#create-container {
+	text-align: center;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	padding-bottom: 10px;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	margin: 0;
+	background: #efefef;
+}
+
+h1 {
+	text-align: center;
+	color: #fefefe;
+	text-shadow: 0 1px 2px #777;
+}
+
 h3 {
 	text-align: center;
 	margin-top: 40px;
+}
+
+#progress {
+	margin-top: 120px;
 }
 
 ul {
@@ -42,4 +67,42 @@ input[type=checkbox] {
 	font-size: 0.8em;
 	font-weight: bold;
 	color: $text-color;
+}
+
+ul > li {
+	padding: 5px 0;
+	border-bottom: 1px solid $border-dark;
+	border-top: 1px solid $border-light;
+	background: $light-back;
+	text-shadow: 0 1px 0 #fff;
+
+	label {
+		cursor: pointer;
+	}
+
+	&:hover {
+		background: darken($stripe, 10%);
+	}
+}
+
+.stripe > li:nth-child(odd) {
+	background: $stripe;
+
+	&:hover {
+		background: darken($stripe, 6%);
+	}
+}
+
+.stripe > li:first-child {
+	border-top: none;
+	&:hover {
+		background: $stripe;
+	}
+}
+.stripe > li:last-child {
+	border-bottom: none;
+}
+
+.check-padding {
+	width: 14px;
 }

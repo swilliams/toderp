@@ -6,9 +6,27 @@
   position: relative;
   padding: 6px 20px; }
 
+#create-container {
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  padding-bottom: 10px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  margin: 0;
+  background: #efefef; }
+
+h1 {
+  text-align: center;
+  color: #fefefe;
+  text-shadow: 0 1px 2px #777; }
+
 h3 {
   text-align: center;
   margin-top: 40px; }
+
+#progress {
+  margin-top: 120px; }
 
 ul {
   list-style-type: none; }
@@ -30,4 +48,31 @@ input[type=checkbox] {
   font-size: 0.8em;
   font-weight: bold;
   color: #777777; }
+
+ul > li {
+  padding: 5px 0;
+  border-bottom: 1px solid #c7e8c8;
+  border-top: 1px solid #ebf7eb;
+  background: #f7fcf7;
+  text-shadow: 0 1px 0 #fff; }
+  ul > li label {
+    cursor: pointer; }
+  ul > li:hover {
+    background: #bbe3bb; }
+
+.stripe > li:nth-child(odd) {
+  background: #dff2df; }
+  .stripe > li:nth-child(odd):hover {
+    background: #c9e9c9; }
+
+.stripe > li:first-child {
+  border-top: none; }
+  .stripe > li:first-child:hover {
+    background: #dff2df; }
+
+.stripe > li:last-child {
+  border-bottom: none; }
+
+.check-padding {
+  width: 14px; }
 
