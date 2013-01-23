@@ -1,8 +1,8 @@
-﻿(function() {
+(function() {
   var parseSerializedDate;
 
   parseSerializedDate = function(text) {
-    return new Date(parseInt(dateString.substr(6)));
+    return new Date(parseInt(text.substr(6)));
   };
 
   Handlebars.registerHelper('prettydate', function(text) {

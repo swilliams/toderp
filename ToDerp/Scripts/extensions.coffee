@@ -1,5 +1,5 @@
 parseSerializedDate = (text) ->
-	new Date(parseInt(dateString.substr(6)))
+	new Date(parseInt(text.substr(6)))
 	
 	
 Handlebars.registerHelper('prettydate', (text) ->

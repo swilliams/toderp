@@ -12,8 +12,21 @@ class TodoItems extends Backbone.Collection
 	completed: ->
 		@where Completed: true
 
+class TodoView extends Backbone.View
+	tagName: 'li'
+	className: 'row'
+	templateId: '#row-template'
 
+	createTemplate: ->
+		@template = @template ? Handlebars.compile($(@templateId).html())
+		@template
+
+	render: ->
+		tmpl = @createTemplate()
+		@$el.html tmpl(@model.toJSON())
+		@
 
 @derp = window.derp ? {}
 @derp.TodoItem = TodoItem
 @derp.TodoItems = TodoItems
+@derp.TodoView = TodoView
