@@ -12,16 +12,15 @@ class TodoItems extends Backbone.Collection
 	completed: ->
 		@where Completed: true
 
-class TodoView extends Backbone.View
-	tagName: 'li'
-	className: 'row'
-	templateId: '#row-template'
-
-	initialize: ->
-		@model.on 'change:Completed', @remove, @
-
-	events:
-		'change input[type=checkbox]' : 'checkChanged'
+class BaseView extends Backbone.View
+	parseForm: ->
+		inputs = @$('input')
+		parseFn = (obj, input) =>
+			input = $(input)
+			inputName = input.attr('name')
+			obj[inputName] = if input.is('[type=checkbox]') then input.is(':checked') else input.val()
+			obj
+		_.reduce inputs, parseFn, {}
 
 	createTemplate: ->
 		@template = @template ? Handlebars.compile($(@templateId).html())
@@ -32,19 +31,37 @@ class TodoView extends Backbone.View
 		@$el.html tmpl(@model.toJSON())
 		@
 
-	parseForm: ->
-		inputs = @$('input')
-		parseFn = (obj, input) =>
-			input = $(input)
-			inputName = input.attr('name')
-			obj[inputName] = if input.is('[type=checkbox]') then input.is(':checked') else input.val()
-			obj
-		_.reduce inputs, parseFn, {}
+class FormView extends BaseView
+	el: '#create'
+
+	initialize: ->
+		@model.on 'sync', @reset, @
+
+	events: 
+		'submit' : 'formSubmitted'
+
+	reset: ->
+		@$('[name=TaskName]').val ''
+		@model = new TodoItem
+
+	formSubmitted: (ev) ->
+		ev.preventDefault()
+		@model.save @parseForm()
+
+class TodoView extends BaseView
+	tagName: 'li'
+	className: 'row'
+	templateId: '#row-template'
+
+	initialize: ->
+		@model.on 'change:Completed', @remove, @
+
+	events:
+		'change input[type=checkbox]' : 'checkChanged'
 
 	checkChanged: ->
 		formValues = @parseForm()
 		@model.save formValues
-
 
 class Controller
 	inProgressId: '#inprogress'
@@ -54,13 +71,17 @@ class Controller
 		coll = new TodoItems
 		coll.on 'reset', @_renderItems, @
 
+		newItem = new TodoItem
+		formView = new FormView model: newItem
+		newItem.once 'sync', @_renderItem, @
+
 		coll.fetch()
 
 	_renderItem: (item) ->
 		view = new TodoView model: item
 		inList = if item.get('Completed') then @completeId else @inProgressId
 		$(inList).append view.render().el
-		item.once 'change:Completed', @_renderItem, @
+		item.once 'sync', @_renderItem, @
 
 	_renderItems: (coll) ->
 		@_renderItem item for item in coll.models

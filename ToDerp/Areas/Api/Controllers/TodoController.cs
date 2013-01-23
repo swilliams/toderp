@@ -34,7 +34,7 @@ namespace ToDerp.Areas.Api.Controllers
         }
 
         [HttpPut]
-        public EmptyResult Item(int id, TodoItem item)
+        public JsonResult Item(int id, TodoItem item)
         {
             var dbItem = _repo.Single(id);
             dbItem.Completed = item.Completed;
@@ -44,7 +44,7 @@ namespace ToDerp.Areas.Api.Controllers
             else 
                 dbItem.CompletedAt = null;
             _repo.Save();
-            return new EmptyResult();
+            return Json(dbItem);
         }
     }
 }

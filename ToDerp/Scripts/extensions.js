@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
   var parseSerializedDate;
 
   parseSerializedDate = function(text) {
@@ -6,7 +6,7 @@
   };
 
   Handlebars.registerHelper('prettydate', function(text) {
-    var d;
+    var d, hours;
     if (text === void 0) {
       return '';
     }
@@ -14,7 +14,11 @@
       return '';
     }
     d = parseSerializedDate(text);
-    return "" + (d.getMonth() + 1) + "/" + (d.getDate()) + "/" + (d.getFullYear());
+    hours = d.getHours();
+    if (hours > 12) {
+      hours -= 12;
+    }
+    return "" + hours + ":" + (d.getMinutes()) + "  " + (d.getMonth() + 1) + "/" + (d.getDate()) + "/" + (d.getFullYear());
   });
 
 }).call(this);
