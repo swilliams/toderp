@@ -35,7 +35,7 @@ class FormView extends BaseView
 	el: '#create'
 
 	initialize: ->
-		@model.on 'sync', @reset, @
+		@reset()
 
 	events: 
 		'submit' : 'formSubmitted'
@@ -47,6 +47,8 @@ class FormView extends BaseView
 	formSubmitted: (ev) ->
 		ev.preventDefault()
 		@model.save @parseForm()
+		@trigger 'TodoItem:Created', @model
+		@reset()
 
 class TodoView extends BaseView
 	tagName: 'li'
@@ -71,11 +73,8 @@ class Controller
 		coll = new TodoItems
 		coll.on 'reset', @_renderItems, @
 
-		newItem = new TodoItem
-		formView = new FormView model: newItem
-
-		# TODO, use the global dispatcher
-		newItem.once 'sync', @_renderItem, @
+		formView = new FormView
+		formView.on 'TodoItem:Created', @_renderItem, @
 
 		coll.fetch()
 

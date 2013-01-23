@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
   var BaseView, Controller, FormView, TodoItem, TodoItems, TodoView, _ref,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
@@ -97,7 +97,7 @@
     FormView.prototype.el = '#create';
 
     FormView.prototype.initialize = function() {
-      return this.model.on('sync', this.reset, this);
+      return this.reset();
     };
 
     FormView.prototype.events = {
@@ -111,7 +111,9 @@
 
     FormView.prototype.formSubmitted = function(ev) {
       ev.preventDefault();
-      return this.model.save(this.parseForm());
+      this.model.save(this.parseForm());
+      this.trigger('TodoItem:Created', this.model);
+      return this.reset();
     };
 
     return FormView;
@@ -159,14 +161,11 @@
     Controller.prototype.completeId = '#completed';
 
     Controller.prototype.index = function() {
-      var coll, formView, newItem;
+      var coll, formView;
       coll = new TodoItems;
       coll.on('reset', this._renderItems, this);
-      newItem = new TodoItem;
-      formView = new FormView({
-        model: newItem
-      });
-      newItem.once('sync', this._renderItem, this);
+      formView = new FormView;
+      formView.on('TodoItem:Created', this._renderItem, this);
       return coll.fetch();
     };
 
