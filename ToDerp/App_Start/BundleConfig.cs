@@ -14,6 +14,7 @@ namespace ToDerp
                         "~/Scripts/lib/handlebars-1.0.rc.1.js",
                         "~/Scripts/lib/bootstrap.js",
                         "~/Scripts/lib/backbone.js",
+                        "~/Scripts/extensions.js",
                         "~/Scripts/app.js"));
 
 

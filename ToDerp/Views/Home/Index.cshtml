@@ -3,6 +3,12 @@
 }
 
 
+<script type="text/html" id="row-template">
+    <span class="span0"><input type="checkbox" id="todo-{{TodoItemId}}" {{#if Completed}}checked="checked"{{/if}} /></span>
+    <span class="span6 task"><label for="todo-{{TodoItemId}}">{{TaskName}}</label></span>
+    <span class="span4 date">{{#if Completed}}{{prettydate CompletedAt}}{{else}}{{prettydate CreatedAt}}{{/if}}</span>
+</script>
+
 <div class="container">
     
 
